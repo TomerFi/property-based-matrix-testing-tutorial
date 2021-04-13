@@ -93,7 +93,7 @@ As demonstrated in [this repository][0], executing both test cases in the same t
 
 You can check out the code for this tutorial in [Github][0].
 
-**:wave: See you in the next part of this tutorial :wave:**
+**:wave: See you in the next tutorial :wave:**
 
 [0]: https://github.com/TomerFi/property-based-matrix-testing-tutorial
 [1]: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests
