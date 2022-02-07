@@ -1,8 +1,9 @@
 ---
 title: Property-Based Matrix Testing in Java
-published: true
+published: false
 description: Property-Based Matrix Testing in Java.
 tags: ["java", "test", "pbt", "junit"]
+cover_image: https://source.unsplash.com/EWLHA4T-mso
 ---
 
 ## Property-Based testing with a dynamic matrix
