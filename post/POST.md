@@ -6,22 +6,14 @@ tags: ["java", "test", "pbt", "junit"]
 cover_image: https://source.unsplash.com/EWLHA4T-mso
 ---
 
-## Property-Based testing with a dynamic matrix
-
-A while back, I had to roll out a dynamic matrix to fully test some feature I was working on at the time.</br>
-
-I can't even remember what was the case or the project, but ever since then, I've been using the same technique to accomplish matrix testing.</br>
+I've been using the same technique to accomplish property-based matrix testing in *Java* for a long time.</br>
 It's not very pretty, or clean, but it gets the job done. :sunglasses:</br>
 
-I've been using [JUnit's ParameterizedTest annotation][1] to incorporate property-based testing (PBT), and a [MethodSource annotation][2] pointing to a method that spits out a stream representing the matrix.</br>
+Using *JUnit's* [ParameterizedTest][1] and a [MethodSource][2] annotations to point to a method as an argument supplier that spits out a stream representing my matrix.</br>
 It's pretty straightforward, but the more parameter types I have in my matrix, the harder it is to read or write the method supplying them. :dizzy_face:</br>
 
-Lately, I discovered [JUnit Pioneer][3], which is a *JUnit 5 Extension Pack*, amongst all the goodies introduced, you can find the [CartesianProductTest annotation][4].</br>
-Incorporated with a couple of a [CartesianEnumSource annotations][5] and the matrix implementation becomes much more simple and elegant. :smiley:</br>
-
-Let's have a look.</br>
-
-Creating a dynamic property-based matrix from the following *Enums* should spit out 6 tests:
+Let's take a look.</br>
+First, these are the two types for our matrix, these should spit out 6 test cases:
 
 ```java
   enum Direction {
@@ -52,12 +44,13 @@ Implementing a matrix from these *Enums* with [JUnit's ParameterizedTest][1] and
   }
 ```
 
-As you can see, adding members to the existing *Enums* will dynamically increase the matrix and therefore the number of tests performed.</br>
+As you can see, adding members to the existing *Enums* will dynamically increase the matrix,</br>
+and therefore the number of tests performed, there's no need to modify the test code.</br>
 
-But, adding a third element to the matrix, and the `getArguments` method, will start losing its readability.</br>
-Nevertheless, that gets the job done, and I've been using this technique throughout my projects for a long time now.
+But, adding a third type to the matrix, and the `getArguments` method, will start losing its readability.
 
-Now, let's accomplish the same with [JUnit Pioneer's CartesianProductTest][4] and a couple of [CartesianEnumSource][5]s:
+Lately, I discovered [JUnit Pioneer][3], which is a *JUnit 5 Extension Pack*.</br>
+Using its [CartesianProductTest][4] and [CartesianEnumSource][5] annotations we can implement the same exact matrix simply and elegantly: :smiley:
 
 ```java
   @CartesianProductTest
@@ -69,9 +62,10 @@ Now, let's accomplish the same with [JUnit Pioneer's CartesianProductTest][4] an
   }
 ```
 
-This will spit out the same matrix, only now, adding a third element is quite simple, just add another annotation, you can find other types of sources beside *Enums*, in [JUnit Pioneer's Documentation][6].</br>
+This will spit out the same matrix, only now, adding a third element is quite simple, just add another [CartesianEnumSource][5] annotation.</br>
+You can find other types of sources beside *Enums*, in *JUnit Pioneer*'s [Documentation][6].
 
-As demonstrated in [this repository][0], executing both test cases in the same test class, using JUnit's platform, will print out:
+As demonstrated in [this repository][0], executing both matrix tests will print out:
 
 ```text
 [INFO] '-- JUnit Jupiter [OK]
